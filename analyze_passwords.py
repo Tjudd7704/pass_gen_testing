@@ -84,11 +84,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Analyze generated passwords.")
     parser.add_argument("--input_files", nargs="+", type=str, help="Paths to the input files containing generated passwords")
     parser.add_argument("--labels", nargs="+", type=str, help="Labels for each input file")
-    parser.add_argument("--output_path", nargs="+", type=str, help="Path to save the output plots")
 
     args = parser.parse_args()
-
-    print(args)
 
     if len(args.input_files) != len(args.labels):
         raise ValueError("The number of input files and labels must be the same.")
@@ -97,7 +94,7 @@ if __name__ == "__main__":
     fig_stats, axs_stats = plt.subplots(1, 2, figsize=(10, 10))  # Adjust figure size
     fig_unique, axs_unique = plt.subplots(1, 2, figsize=(10, 10))  # Adjust figure size
     fig_character, axs_character = plt.subplots(1, 2, figsize=(10, 10))  # Adjust figure size
-    print(args.input_files[0])
+
     for i, (input_file, label) in enumerate(zip(args.input_files, args.labels)):
         # Calculate and print statistics
         calculate_password_statistics(input_file, axs_stats[i], label)
@@ -108,12 +105,11 @@ if __name__ == "__main__":
         # Calculate and print password characteristics
         calculate_password_characteristics(input_file, axs_character[i], label)
     
-    print(args.output_path)
     fig_stats.tight_layout(pad=4.0)
-    fig_stats.savefig(f"{args.output_path}/password_strength_distribution.png")
-
+    fig_stats.show()
+    
     fig_unique.tight_layout(pad=4.0)
-    fig_unique.savefig(f"{args.output_path}/password_uniqueness.png")
+    fig_unique.show()
 
     fig_character.tight_layout(pad=4.0)
-    fig_character.savefig(f"{args.output_path}/password_characteristics.png")
+    fig_character.show()
