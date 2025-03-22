@@ -2,6 +2,8 @@ import argparse
 import zxcvbn
 import statistics
 from tqdm import tqdm
+import matplotlib
+matplotlib.use('TkAgg') 
 import matplotlib.pyplot as plt
 import seaborn as sns
 
